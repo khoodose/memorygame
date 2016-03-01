@@ -1,0 +1,80 @@
+body {
+/*  background-color: salmon;
+*/
+  background-image: url("kitchen1.jpg");
+  font-family: "Spicy Rice", cursive;
+}
+
+table {
+  margin: 0 auto;
+  width: 600px;
+  height: 450px;
+  background-color: white;
+  text-align: center;
+}
+
+/*td {
+  height: 75px;
+  width: 16.66%;
+  background-color: #ff3399;
+}*/
+
+#title-area {
+  height: 150px;
+  width: 100%;
+  background-color: #ff99ff;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  color: #cc0066;
+  font-size: 40px;
+  font-weight: bold;
+  font-family: "Spicy Rice", cursive;
+  line-height: 150px;
+}
+
+#instructions {
+  height: 120px;
+  width: 590px;
+  background-color: #ffffcc;
+  margin: 0 auto;
+  color: #663300;
+  padding: 5px;
+  font-size: 15px;
+}
+
+.default {
+  height: 75px;
+  width: 16.66%;
+  background-color: #ff3399;
+}
+
+.default img {
+  width: 100%;
+  height: auto;
+  opacity: 0;
+}
+
+.matched {
+  height: 75px;
+  width: 16.66%;
+  background-color: black;
+}
+
+.matched img {
+  width: 100%;
+  height: auto;
+  opacity: 1;
+}
+
+.selected {
+  height: 75px;
+  width: 16.66%;
+  background-color: #666699;
+}
+
+.selected img {
+  width: 100%;
+  height: auto;
+  opacity: 0.8;
+}
