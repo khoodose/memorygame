@@ -18,6 +18,8 @@ var guessCounter = 0;
 
 var imageArray = ["imgs/cake.png", "imgs/candle.png", "imgs/chocolate.png", "imgs/music.png", "imgs/pizza.png", "imgs/wine.png", "imgs/utensils.png", "imgs/cards.png", "imgs/macaron.png", "imgs/hat.png", "imgs/present.png", "imgs/polaroid.png", "imgs/cake.png", "imgs/candle.png", "imgs/chocolate.png", "imgs/music.png", "imgs/pizza.png", "imgs/wine.png", "imgs/utensils.png", "imgs/cards.png", "imgs/macaron.png", "imgs/hat.png", "imgs/present.png", "imgs/polaroid.png"];
 
+var dudeArray = ["imgs/basketball.png", "imgs/beer.png", "imgs/burger.png", "imgs/donut.png", "imgs/drums.png", "imgs/drumstick.png", "imgs/football.png", "imgs/guitar.png", "imgs/mic.png", "imgs/sunglasses.png", "imgs/whisky.png", "imgs/xbox.png", "imgs/basketball.png", "imgs/beer.png", "imgs/burger.png", "imgs/donut.png", "imgs/drums.png", "imgs/drumstick.png", "imgs/football.png", "imgs/guitar.png", "imgs/mic.png", "imgs/sunglasses.png", "imgs/whisky.png", "imgs/xbox.png"];
+
 var randomArray = [];
 
 // need to hard-code the end value for now
