@@ -16,11 +16,34 @@ var gameOver = false;
 // track number of guesses
 var guessCounter = 0;
 
+var imageArray = ["imgs/cake.png", "imgs/candle.png", "imgs/chocolate.png", "imgs/music.png", "imgs/pizza.png", "imgs/wine.png", "imgs/utensils.png", "imgs/cards.png", "imgs/macaron.png", "imgs/hat.png", "imgs/present.png", "imgs/polaroid.png", "imgs/cake.png", "imgs/candle.png", "imgs/chocolate.png", "imgs/music.png", "imgs/pizza.png", "imgs/wine.png", "imgs/utensils.png", "imgs/cards.png", "imgs/macaron.png", "imgs/hat.png", "imgs/present.png", "imgs/polaroid.png"];
+
+var randomArray = [];
+
+// need to hard-code the end value for now
+for (var i=0; i<24; i++) {
+  var randomInd = Math.floor(Math.random()*imageArray.length);
+  var image = imageArray[randomInd];
+  randomArray.push(image);
+  imageArray.splice(randomInd, 1);
+}
+
+// push the images into each tile
+for (var i=1; i<=24; i++) {
+  var index = i;
+  $("#cell"+index).find("img").attr("src", randomArray.shift());
+}
+
+// can't get the append approach to work yet
+// for (var i=1; i<=24; i++) {
+//   var index = i;
+//   $("#cell"+index).append("<img src="+randomArray.shift()+"/>");
+// }
+
 // check for game end when all tiles matched.
 function checkEnd () {
   if ($("td").length===$("td.matched").length) {
     gameOver = true;
-    console.log(guessCounter);
     alert("Winner, winner, chicken dinner!\nYou did it in " + guessCounter + " turns.");
     location.reload();
   }
