@@ -55,6 +55,10 @@ table {
   opacity: 0;
 }
 
+.default:hover {
+  background-color: red;
+}
+
 .matched {
   height: 75px;
   width: 16.66%;

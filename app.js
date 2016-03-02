@@ -2,22 +2,26 @@ $(function(){
   console.log("page loaded and ready to go");
 
 
-// helper function to test whether we've grabbed the right element
+// helper function for checking when we select elements
 function alertTest () {
   alert("Pick me, pick me!");
 }
 
-// variable to check whether there has been a first selection
+// check if there has been a first selection
 var earlierSelection = false;
 
-// variable to track if game is over. Not used for main flow yet.
+// track if game is over.
 var gameOver = false;
 
-// function to check if game is over when all tiles are matched.
+// track number of guesses
+var guessCounter = 0;
+
+// check for game end when all tiles matched.
 function checkEnd () {
   if ($("td").length===$("td.matched").length) {
     gameOver = true;
-    alert("Winner, winner, chicken dinner!");
+    console.log(guessCounter);
+    alert("Winner, winner, chicken dinner!\nYou did it in " + guessCounter + " turns.");
     location.reload();
   }
 }
@@ -30,12 +34,12 @@ function eachTurn () {
     alert("This one's matched. Quick, choose another!");
   }
 
-  // if somehow player clicks on the previously selected cell, he/she must choose another
+  // if player clicks on already selected cell, must choose another
   else if ($(this).attr("class")==="selected") {
     alert("You just clicked on this one. Choose another.");
   }
 
-  // if no other cell has been selected.
+  // if no other cell has been selected (first selection)
   else if (earlierSelection===false) {
 
     $(this).removeClass("default").addClass("selected");
@@ -43,7 +47,7 @@ function eachTurn () {
 
   }
 
-  // if one other cell has been selected.
+  // if one other cell has been selected (second selection)
   else if (earlierSelection===true) {
 
     $(this).removeClass("default").addClass("selected");
@@ -51,24 +55,25 @@ function eachTurn () {
     var firstImage = $(".selected").eq(0).find("img").attr("src");
     var secondImage = $(".selected").eq(1).find("img").attr("src");
 
-    // console.log(firstImage);
-    // console.log(secondImage);
-    // console.log(firstImage===secondImage);
 
     if (firstImage===secondImage) {
-      // now we need to set both classes to matched
+      // set both cells' classes to "matched"
       $(".selected").eq(0).removeClass("selected").addClass("matched");
       // the second element has become the first
       $(".selected").eq(0).removeClass("selected").addClass("matched");
 
+      guessCounter++;
       checkEnd();
 
     }
 
     else {
-      // reset both classes to default
+      // reset both cells' classes to default
       $(".selected").eq(0).removeClass("selected").addClass("default");
       $(".selected").eq(0).removeClass("selected").addClass("default");
+
+      guessCounter++;
+
     }
 
     earlierSelection = false;
