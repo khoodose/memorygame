@@ -111,4 +111,17 @@ function eachTurn () {
 // add logic for when tile is clicked
 $("td").on("click", eachTurn);
 
+function roleSwitch () {
+
+  if ($("#role").attr("href")==="css/style.css") {
+    $("#role").attr("href", "css/dude.css");
+  }
+  else {
+    $("#role").attr("href", "css/style.css");
+  }
+}
+
+// change stylesheet when switch role button clicked
+$("#switch").on("click", roleSwitch);
+
 });

@@ -22,23 +22,23 @@ table {
 #title-area {
   height: 150px;
   width: 100%;
-  background-color: #ff99ff;
+  background-color: navy;
   display: block;
   margin: 0 auto;
   text-align: center;
-  color: #cc0066;
+  color: gold;
   font-size: 40px;
   font-weight: bold;
-  font-family: "Spicy Rice", cursive;
+  font-family: Helvetica;
   line-height: 150px;
 }
 
 #instructions {
   height: 120px;
   width: 590px;
-  background-color: #ffffcc;
+  background-color: gold;
   margin: 0 auto;
-  color: #663300;
+  color: navy;
   padding: 5px;
   font-size: 15px;
 }
@@ -46,7 +46,7 @@ table {
 .default {
   height: 75px;
   width: 16.66%;
-  background-color: #ff3399;
+  background-color: blue;
 }
 
 .default img {
