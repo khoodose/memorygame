@@ -20,6 +20,26 @@ var imageArray = ["imgs/cake.png", "imgs/candle.png", "imgs/chocolate.png", "img
 
 var dudeArray = ["imgs/basketball.png", "imgs/beer.png", "imgs/burger.png", "imgs/donut.png", "imgs/drums.png", "imgs/drumstick.png", "imgs/football.png", "imgs/guitar.png", "imgs/mic.png", "imgs/sunglasses.png", "imgs/whisky.png", "imgs/xbox.png", "imgs/basketball.png", "imgs/beer.png", "imgs/burger.png", "imgs/donut.png", "imgs/drums.png", "imgs/drumstick.png", "imgs/football.png", "imgs/guitar.png", "imgs/mic.png", "imgs/sunglasses.png", "imgs/whisky.png", "imgs/xbox.png"];
 
+
+function makeRandomArray (array) {
+  var randomArray = [];
+
+  for (var i=0; i<24; i++) {
+    var randomInd = Math.floor(Math.random()*array.length);
+    var image = array[randomInd];
+    randomArray.push(image);
+    array.splice(randomInd, 1);
+  }
+}
+
+function populateTiles (array) {
+  for (var i=1; i<=24; i++) {
+    var index = i;
+    $("#cell"+index).find("img").attr("src", array.shift());
+  }
+}
+
+
 var randomArray = [];
 
 // need to hard-code the end value for now
@@ -35,6 +55,8 @@ for (var i=1; i<=24; i++) {
   var index = i;
   $("#cell"+index).find("img").attr("src", randomArray.shift());
 }
+
+
 
 // can't get the append approach to work yet
 // for (var i=1; i<=24; i++) {
