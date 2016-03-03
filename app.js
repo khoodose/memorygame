@@ -9,8 +9,11 @@ function alertTest () {
 // check if there has been a first selection
 var earlierSelection = false;
 
-// track if either player has won.
+// track if either player has won
 var playerWin = false;
+
+// track of game is over at the end
+var gameOver = false;
 
 // track number of guesses
 var guessCounter = 0;
@@ -74,11 +77,21 @@ function checkEnd () {
     else if (dudeScore<girlScore) {
       alert("But as Duncan McLeod said, 'There can be only one.'\nTonight's overall winner and unofficial party planner of the year is playa bro!");
 
+      gameOver = true;
       location.reload();
     }
+
     else if (girlScore<dudeScore) {
       alert("But as Duncan McLeod said, 'There can be only one.'\nTonight's overall winner and unofficial party planner of the year is playa girl!");
 
+      gameOver = true;
+      location.reload();
+    }
+
+    else if (girlScore===dudeScore) {
+      alert("But as Duncan McLeod said... wait you guys played to a draw?\nWow, what a great day for gender equality. Winners all around!");
+
+      gameOver = true;
       location.reload();
     }
 
@@ -114,7 +127,6 @@ function eachTurn () {
     var firstImage = $(".selected").eq(0).find("img").attr("src");
     var secondImage = $(".selected").eq(1).find("img").attr("src");
 
-
     if (firstImage===secondImage) {
       // set both cells' classes to "matched"
       $(".selected").eq(0).removeClass("selected").addClass("matched");
@@ -128,8 +140,12 @@ function eachTurn () {
 
     else {
       // reset both cells' classes to default
-      $(".selected").eq(0).removeClass("selected").addClass("default");
-      $(".selected").eq(0).removeClass("selected").addClass("default");
+
+      setTimeout(function() {
+        $(".selected").eq(0).removeClass("selected").addClass("default");
+        $(".selected").eq(0).removeClass("selected").addClass("default");
+      }, 500);
+
 
       guessCounter++;
 
