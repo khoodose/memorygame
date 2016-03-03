@@ -67,29 +67,44 @@ function checkEnd () {
       console.log(dudeScore);
     }
 
-    alert("Winner, winner, chicken dinner!\nYou did it in " + guessCounter + " turns.");
+    // $("#instructions").text("Yay, you did it in " + guessCounter + " turns.");
+
+    alert("Yay!\nYou did it in " + guessCounter + " turns.");
 
     // put logic here to switch to dude or girl (with instruction) if this was 1st player and end the game if it's 2nd player.
     if (dudeScore===0 || girlScore===0) {
-      alert("Now it's time for player 2 to show what you can do.  Click 'switch roles' to begin!");
+
+      // $("#instructions").text("Now it's time for the other side to show what you can do.  Click 'switch roles' and begin!");
+
+      alert("Now it's time for the other side to show what you can do.  Click 'switch roles' and begin!");
     }
 
     else if (dudeScore<girlScore) {
-      alert("But as Duncan McLeod said, 'There can be only one.'\nTonight's overall winner and unofficial party planner of the year is playa bro!");
+
+      // $("#instructions").text("But as Duncan McLeod said, 'There can be only one.'\nThe winner by a score of " + dudeScore + " to " + girlScore + " moves is playa bro!");
+
+      alert("But as Duncan McLeod said, 'There can be only one.'\nThe winner by a score of " + dudeScore + " to " + girlScore + " moves is playa bro!");
 
       gameOver = true;
       location.reload();
     }
 
     else if (girlScore<dudeScore) {
-      alert("But as Duncan McLeod said, 'There can be only one.'\nTonight's overall winner and unofficial party planner of the year is playa girl!");
+
+      // $("#instructions").text("But as Duncan McLeod said, 'There can be only one.'\nThe winner by a score of " + girlScore + " to " + dudeScore + " moves is playa sistah!");
+
+
+      alert("But as Duncan McLeod said, 'There can be only one.'\nThe winner by a score of " + girlScore + " to " + dudeScore + " moves is playa sistah!");
 
       gameOver = true;
       location.reload();
     }
 
     else if (girlScore===dudeScore) {
-      alert("But as Duncan McLeod said... wait you guys played to a draw?\nWow, what a great day for gender equality. Winners all around!");
+
+      // $("#instructions").text("But as Duncan McLeod said... wait you guys played to a draw with" + girlScore + "moves each?\nWow, what a great day for gender equality. Winners all around!");
+
+      alert("But as Duncan McLeod said... wait you guys played to a draw with " + girlScore + " moves each?\nWow, what a great day for gender equality. Winners all around!");
 
       gameOver = true;
       location.reload();
@@ -162,33 +177,35 @@ function eachTurn () {
 $("td").on("click", eachTurn);
 
 function roleSwitch () {
-  // if current role is girl, switch to dude
-  if ($("#role").attr("href")==="css/style.css") {
 
-    if (guessCounter>0 && playerWin===false) {
-      alert("Sorry, this turn has already begun.  Please finish it!");
+    // if current role is girl, switch to dude
+    if ($("#role").attr("href")==="css/style.css") {
+
+      if (guessCounter>0 && playerWin===false) {
+        alert("Sorry, this turn has already begun.  Please finish it!");
+      }
+      else {
+        $("#role").attr("href", "css/dude.css");
+        $("td").removeClass().addClass("default");
+        populateTiles(dArray);
+        guessCounter=0;
+      }
+
     }
+    // if current role is dude, switch to girl
     else {
-      $("#role").attr("href", "css/dude.css");
-      $("td").removeClass().addClass("default");
-      populateTiles(dArray);
-      guessCounter=0;
+
+      if (guessCounter>0 && playerWin===false) {
+        alert("Sorry, this turn has already begun.  Please finish it!");
+      }
+      else {
+        $("#role").attr("href", "css/style.css");
+        $("td").removeClass().addClass("default");
+        populateTiles(gArray);
+        guessCounter=0;
+      }
     }
 
-  }
-  // if current role is dude, switch to girl
-  else {
-
-    if (guessCounter>0 && playerWin===false) {
-      alert("Sorry, this turn has already begun.  Please finish it!");
-    }
-    else {
-      $("#role").attr("href", "css/style.css");
-      $("td").removeClass().addClass("default");
-      populateTiles(gArray);
-      guessCounter=0;
-    }
-  }
 
 }
 
