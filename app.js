@@ -1,7 +1,6 @@
 $(function(){
   console.log("page loaded and ready to go");
 
-
 // helper function for checking when we select elements
 function alertTest () {
   alert("Pick me, pick me!");
@@ -10,13 +9,15 @@ function alertTest () {
 // check if there has been a first selection
 var earlierSelection = false;
 
-// track if game is over.
-var gameOver = false;
+// track if either player has won.
+var playerWin = false;
 
 // track number of guesses
 var guessCounter = 0;
+var dudeScore = 0;
+var girlScore = 0;
 
-var imageArray = ["imgs/cake.png", "imgs/candle.png", "imgs/chocolate.png", "imgs/music.png", "imgs/pizza.png", "imgs/wine.png", "imgs/utensils.png", "imgs/cards.png", "imgs/macaron.png", "imgs/hat.png", "imgs/present.png", "imgs/polaroid.png", "imgs/cake.png", "imgs/candle.png", "imgs/chocolate.png", "imgs/music.png", "imgs/pizza.png", "imgs/wine.png", "imgs/utensils.png", "imgs/cards.png", "imgs/macaron.png", "imgs/hat.png", "imgs/present.png", "imgs/polaroid.png"];
+var girlArray = ["imgs/cake.png", "imgs/candle.png", "imgs/chocolate.png", "imgs/music.png", "imgs/pizza.png", "imgs/wine.png", "imgs/utensils.png", "imgs/cards.png", "imgs/macaron.png", "imgs/hat.png", "imgs/present.png", "imgs/polaroid.png", "imgs/cake.png", "imgs/candle.png", "imgs/chocolate.png", "imgs/music.png", "imgs/pizza.png", "imgs/wine.png", "imgs/utensils.png", "imgs/cards.png", "imgs/macaron.png", "imgs/hat.png", "imgs/present.png", "imgs/polaroid.png"];
 
 var dudeArray = ["imgs/basketball.png", "imgs/beer.png", "imgs/burger.png", "imgs/donut.png", "imgs/drums.png", "imgs/drumstick.png", "imgs/football.png", "imgs/guitar.png", "imgs/mic.png", "imgs/sunglasses.png", "imgs/whisky.png", "imgs/xbox.png", "imgs/basketball.png", "imgs/beer.png", "imgs/burger.png", "imgs/donut.png", "imgs/drums.png", "imgs/drumstick.png", "imgs/football.png", "imgs/guitar.png", "imgs/mic.png", "imgs/sunglasses.png", "imgs/whisky.png", "imgs/xbox.png"];
 
@@ -30,46 +31,57 @@ function makeRandomArray (array) {
     randomArray.push(image);
     array.splice(randomInd, 1);
   }
+
+  return randomArray;
 }
 
 function populateTiles (array) {
   for (var i=1; i<=24; i++) {
     var index = i;
-    $("#cell"+index).find("img").attr("src", array.shift());
+    $("#cell"+index).find("img").attr("src", array[i-1]);
   }
 }
 
+var gArray = makeRandomArray(girlArray);
+var dArray = makeRandomArray(dudeArray);
 
-var randomArray = [];
-
-// need to hard-code the end value for now
-for (var i=0; i<24; i++) {
-  var randomInd = Math.floor(Math.random()*imageArray.length);
-  var image = imageArray[randomInd];
-  randomArray.push(image);
-  imageArray.splice(randomInd, 1);
-}
-
-// push the images into each tile
-for (var i=1; i<=24; i++) {
-  var index = i;
-  $("#cell"+index).find("img").attr("src", randomArray.shift());
-}
-
-
-
-// can't get the append approach to work yet
-// for (var i=1; i<=24; i++) {
-//   var index = i;
-//   $("#cell"+index).append("<img src="+randomArray.shift()+"/>");
-// }
+// default array of objects given the default theme
+populateTiles(gArray);
 
 // check for game end when all tiles matched.
 function checkEnd () {
   if ($("td").length===$("td.matched").length) {
-    gameOver = true;
+    playerWin = true;
+
+    // check the stylesheet to know whose score it is.
+    if ($("#role").attr("href")==="css/style.css") {
+      girlScore = guessCounter;
+      console.log(girlScore);
+    }
+
+    else if ($("#role").attr("href")==="css/dude.css") {
+      dudeScore = guessCounter;
+      console.log(dudeScore);
+    }
+
     alert("Winner, winner, chicken dinner!\nYou did it in " + guessCounter + " turns.");
-    location.reload();
+
+    // put logic here to switch to dude or girl (with instruction) if this was 1st player and end the game if it's 2nd player.
+    if (dudeScore===0 || girlScore===0) {
+      alert("Now it's time for player 2 to show what you can do.  Click 'switch roles' to begin!");
+    }
+
+    else if (dudeScore<girlScore) {
+      alert("But as Duncan McLeod said, 'There can be only one.'\nTonight's overall winner and unofficial party planner of the year is playa bro!");
+
+      location.reload();
+    }
+    else if (girlScore<dudeScore) {
+      alert("But as Duncan McLeod said, 'There can be only one.'\nTonight's overall winner and unofficial party planner of the year is playa girl!");
+
+      location.reload();
+    }
+
   }
 }
 
@@ -129,20 +141,39 @@ function eachTurn () {
 
 }
 
-// console.log($("td").length);
-// console.log($("td.matched").length);
 
 // add logic for when tile is clicked
 $("td").on("click", eachTurn);
 
 function roleSwitch () {
-
+  // if current role is girl, switch to dude
   if ($("#role").attr("href")==="css/style.css") {
-    $("#role").attr("href", "css/dude.css");
+
+    if (guessCounter>0 && playerWin===false) {
+      alert("Sorry, this turn has already begun.  Please finish it!");
+    }
+    else {
+      $("#role").attr("href", "css/dude.css");
+      $("td").removeClass().addClass("default");
+      populateTiles(dArray);
+      guessCounter=0;
+    }
+
   }
+  // if current role is dude, switch to girl
   else {
-    $("#role").attr("href", "css/style.css");
+
+    if (guessCounter>0 && playerWin===false) {
+      alert("Sorry, this turn has already begun.  Please finish it!");
+    }
+    else {
+      $("#role").attr("href", "css/style.css");
+      $("td").removeClass().addClass("default");
+      populateTiles(gArray);
+      guessCounter=0;
+    }
   }
+
 }
 
 // change stylesheet when switch role button clicked

@@ -34,7 +34,7 @@ table {
 }
 
 #instructions {
-  height: 120px;
+  height: 150px;
   width: 590px;
   background-color: #ffffcc;
   margin: 0 auto;
@@ -52,7 +52,7 @@ table {
 .default img {
   width: 100%;
   height: auto;
-  opacity: 1;
+  opacity: 0;
 }
 
 .default:hover {
@@ -91,3 +91,10 @@ table {
   font-weight: bold;
   font-size: 12px;
 }
+
+/*#intro-area {
+  width: 100px;
+  height: 100px;
+  background-color: #ffffcc;
+  margin-top: 30px;
+}*/
